@@ -9,10 +9,20 @@ namespace Calculator
     {
         public int DoMath(string stuffToCalculate)
         {
-            var splitNumbers = stuffToCalculate.Split('+')
-                .Select(int.Parse).ToArray();
+            try
+            {
+                var splitNumbers = stuffToCalculate
+                                    .Split('+')
+                                    .Select(int.Parse);
 
-            return splitNumbers[0] + splitNumbers[1];
+                return splitNumbers.Sum();
+            }
+            catch(FormatException ex)
+            {
+                throw new InvalidInputException();
+            }
+
+            
         }
     }
 }
